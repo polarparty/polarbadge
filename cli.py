@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import click
-from polarbadge.parties.pp33 import cli as pp33_cli
+from polarbadge.parties.pp34 import cli as pp34_cli
 
 
 @click.group()
@@ -8,9 +8,9 @@ def cli():
     pass
 
 
-cli.command(pp33_cli.pp33_everyone)
-cli.command(pp33_cli.pp33_users)
-cli.command(pp33_cli.register)
+cli.command(pp34_cli.pp34_everyone)
+cli.command(pp34_cli.pp34_users)
+cli.command(pp34_cli.register)
 
 
 if __name__ == "__main__":

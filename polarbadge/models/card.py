@@ -69,6 +69,7 @@ class TextBox(BaseModel):
     align_x: Literal["left", "center", "right"] = "center"
     align_y: Literal["top", "middle", "bottom"] = "middle"
     font_override: Font | None = None
+    fit_single_line: bool = False
 
     @property
     def css(self) -> str:
@@ -117,7 +118,8 @@ class Design(BaseModel):
     image_profile: ImageBox
     text_nick: TextBox
     text_name: TextBox
-    text_crew: TextBox
+    text_crew: TextBox | None = None
+    text_crew_name: TextBox | None = None
     code_2d_box: Code2DBox | None = None
 
     @model_validator(mode='after')
@@ -187,6 +189,7 @@ class Design(BaseModel):
             "text_nick.font_override",
             "text_name.font_override",
             "text_crew.font_override",
+            "text_crew_name.font_override",
             "code_2d_box.id_text_font",
         ]
         found_fonts = {}

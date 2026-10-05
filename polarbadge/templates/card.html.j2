@@ -113,7 +113,7 @@
             <img src="data:image/png;base64, {{ subject.pic_b64 }}">
         </div>
 
-        <div class="textBox" id="textNick" style="{{ design.text_nick.css }}">
+        <div class="textBox" id="textNick" style="{{ design.text_nick.css }}{% if design.text_nick.fit_single_line %}; font-size: {{ subject.nick_font_size }}pt; white-space: nowrap; line-height: 1;{% endif %}">
             <p style="display: inline; vertical-align: {{ design.text_nick.align_y }}">{{ subject.nick }}</p>
         </div>
 
@@ -121,13 +121,18 @@
             <p style="display: inline; vertical-align: {{ design.text_name.align_y }}">{{ subject.name }}</p>
         </div>
 
+        {% if design.text_crew_name and design.text_crew_name.font_override %}
+        <div class="textBox" id="textCrewName" style="{{ design.text_crew_name.css }}; font-size: {{ subject.crew_font_size }}pt; white-space: nowrap;">
+          <p style="display: inline; vertical-align: {{ design.text_crew_name.align_y }}">{{ subject.crew }}</p>
+        </div>
+        {% elif design.text_crew %}
         <div class="textBox" id="textCrew" style="{{ design.text_crew.css }}">
             <svg viewBox="0 0 {{ design.text_crew.width_mm }} {{ design.text_crew.height_mm }}">
-
               <text x="0" y="0">{{ subject.crew }}</text>
             </svg>
-            <p style="display: inline; vertical-align: {{ design.text_crew.align_y }}">{{ subject.crew }}</p>
+          <p style="display: inline; vertical-align: {{ design.text_crew.align_y }}">{{ subject.crew }}</p>
         </div>
+        {% endif %}
 
         {% if subject.code_b64 %}
             <div class="2DBarcode" id="barcode">
